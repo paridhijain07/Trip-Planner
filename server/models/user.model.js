@@ -12,6 +12,14 @@ const userSchema=new mongoose.Schema({
         type:String,
         required:[true,'provide password']
     },
+    forgot_password_otp:{
+        type:String,
+        default:null
+    },
+    forgot_password_expiry:{
+        type:Date,
+        default:''
+    },
     mobile:{
         type:Number,
         default:null,
@@ -24,9 +32,20 @@ const userSchema=new mongoose.Schema({
         type:String,
         default:''
     },
+    verify_email:{
+        type:Boolean,
+        default:false
+    },
     access_token:{
         type:String,
         default:'',
     },
+    wishlist:{
+        type:mongoose.Schema.ObjectId,
+        ref:'wishlist'
+    }
+},{
+    timestamps:true,
 })
-module.exports=userSchema
+const userModel=mongoose.model('User',userSchema)
+export default userModel;
